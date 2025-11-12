@@ -482,6 +482,32 @@ footer {
   background: #0b1224;
   font-size: 14px;
 }
-
-
+/* Responsive layout for mobile screens */
+@media (max-width: 768px) {
+    .perceptron-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .perceptron-text,
+    .perceptron-visual {
+        width: 100%;
+        text-align: center;
+    }
+    .diagram-box {
+        max-width: 90%;
+        height: auto;
+    }
+    svg {
+        width: 100%;
+        height: auto;
+    }
+    nav {
+        width: 100%;
+        padding: 0 15px;
+    }
+    .nav-right {
+        gap: 16px;
+    }
+}
 
