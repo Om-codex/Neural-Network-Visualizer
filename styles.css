@@ -190,7 +190,7 @@ section {
 /* ------------------ LAYOUT BOXES ------------------ */
 .perceptron-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: column;
     align-items: center;
     gap: 40px;
 }
@@ -508,6 +508,12 @@ footer {
     }
     .nav-right {
         gap: 16px;
+    }
+}
+/* Extra small screens (phones) */
+@media (max-width: 600px) {
+    .perceptron-container {
+        gap: 35px;
     }
 }
 
