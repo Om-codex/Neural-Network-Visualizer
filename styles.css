@@ -217,16 +217,18 @@ section {
 .diagram-box {
     background: #0b1224;
     border: 1px solid #294a88;
-    justify-self: center;
     border-radius: 14px;
-    padding: 20px;
+    padding: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 20px rgba(80,140,255,0.25);
+    flex-direction: column;
+    box-shadow: 0 0 30px rgba(80, 140, 255, 0.25);
     transition: 0.3s ease;
-    max-width: 100%;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    overflow-x: auto;
 }
 .diagram-box:hover { box-shadow: 0 0 35px rgba(120,180,255,0.45); }
 
@@ -235,6 +237,7 @@ section {
     max-width: 100%;
     height: auto;
     display: block;
+    margin:0 auto;
 }
 
 /* EXAMPLE SECTION */
@@ -569,4 +572,48 @@ footer {
     #subtitle { font-size: 0.95rem; }
     .perceptron-text { font-size: 14px; line-height: 1.5; }
     .diagram-box { padding: 12px; }
+}
+/* ------------------ TEXT RESPONSIVENESS FIX ------------------ */
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1024px) { html { font-size: 15px; } }
+@media (max-width: 768px) { html { font-size: 14px; } }
+@media (max-width: 480px) { html { font-size: 13px; } }
+
+#title {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+}
+
+#subtitle {
+    font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+}
+
+p, li, .scene-desc, .perceptron-text {
+    font-size: clamp(0.9rem, 2.8vw, 1rem);
+    line-height: 1.7;
+}
+
+.scene-box h3 {
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+}
+
+.math-section, .math-section1 {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+@media (max-width: 600px) {
+    .scene-box {
+        padding: 18px;
+        font-size: 0.95rem;
+    }
+
+    .math-toggle-text {
+        font-size: 0.95rem;
+    }
+
+    .update-formula {
+        font-size: 0.9rem;
+    }
 }
