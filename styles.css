@@ -190,34 +190,52 @@ section {
 /* ------------------ LAYOUT BOXES ------------------ */
 .perceptron-container {
     display: flex;
-    justify-content: column;
+    justify-content: space-between;
     align-items: center;
     gap: 40px;
+    flex-wrap: wrap;
+    margin: 40px auto;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .perceptron-text {
-    width: 48%;
+    flex: 1 1 48%;
+    min-width: 320px;
     line-height: 1.6;
     color: #c8d2e5;
 }
 
 .perceptron-visual {
-    width: 48%;
+    flex: 1 1 48%;
+    min-width: 320px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-/* DIAGRAM BOX */
 .diagram-box {
     background: #0b1224;
     border: 1px solid #294a88;
+    justify-self: center;
     border-radius: 14px;
     padding: 20px;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-shadow: 0 0 20px rgba(80,140,255,0.25);
     transition: 0.3s ease;
+    max-width: 100%;
+    margin: 0 auto;
 }
 .diagram-box:hover { box-shadow: 0 0 35px rgba(120,180,255,0.45); }
+
+.diagram-box svg, 
+.perceptron-visual svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 
 /* EXAMPLE SECTION */
 .example-container {
@@ -313,7 +331,7 @@ section {
 }
 
 .loss-bar {
-    width: 65%; /* Loss level (adjustable later) */
+    width: 65%;
     height: 100%;
     background: linear-gradient(90deg, #ff3670, #ff9d42);
     animation: lossPulse 1.6s ease-in-out infinite;
@@ -331,6 +349,7 @@ section {
     color: #8fa5cf;
     margin-top: 6px;
 }
+
 /* Soft red glow for wrong prediction */
 .output-neuron-error {
     fill: #170d14;
@@ -346,7 +365,6 @@ section {
     100% { filter: drop-shadow(0 0 3px rgba(255, 80, 120, 0.4)); }
 }
 
-/* ŷ glowing text */
 .y-hat-error {
     fill: #ff6f96;
     font-size: 18px;
@@ -356,11 +374,12 @@ section {
 }
 
 @keyframes yGlow {
-    0%   { opacity: 0.75; text-shadow: 0 0 4px rgba(255, 80, 120, 0.4); }
-    50%  { opacity: 1;    text-shadow: 0 0 16px rgba(255, 80, 120, 1); }
-    100% { opacity: 0.75; text-shadow: 0 0 4px rgba(255, 80, 120, 0.4); }
+    0%   { opacity: 0.75; text-shadow: 0 0 4px rgba(255, 80, 120, 0.4)); }
+    50%  { opacity: 1;    text-shadow: 0 0 16px rgba(255, 80, 120, 1)); }
+    100% { opacity: 0.75; text-shadow: 0 0 4px rgba(255, 80, 120, 0.4)); }
 }
-/* Backward error wave (smooth, premium glow) */
+
+/* Backward error wave */
 .error-backflow {
     stroke: #ff6d8a;
     stroke-width: 3;
@@ -370,13 +389,11 @@ section {
     filter: drop-shadow(0 0 8px rgba(255, 80, 120, 0.8));
 }
 
-/* Reverse dash animation */
 @keyframes reverseFlow {
     from { stroke-dashoffset: 0; }
-    to { stroke-dashoffset: 20; } /* positive offset = backward direction */
+    to { stroke-dashoffset: 20; }
 }
 
-/* Hidden neurons receiving error signal */
 .hidden-neuron.error-receive {
     animation: receivePulse 2.2s ease-in-out infinite;
 }
@@ -386,11 +403,11 @@ section {
     50%  { filter: drop-shadow(0 0 14px rgba(255,80,120,1)); }
     100% { filter: drop-shadow(0 0 3px rgba(255,80,120,0.3)); }
 }
-/* Used to stop forward signal dots during backprop */
+
 .pause-forward .signal-dot {
     opacity: 0 !important;
 }
-/* Infinite Red ↔ Blue Learning Glow Animation */
+
 .learning-line {
     stroke-width: 4;
     fill: none;
@@ -399,21 +416,21 @@ section {
     filter: drop-shadow(0 0 10px rgba(255, 80, 120, 0.9));
 }
 
-/* Keyframes to swap between red ↔ blue smoothly */
 @keyframes learnPulse {
     0% {
-        stroke: #ff4d6d;  /* strong red at start (error) */
+        stroke: #ff4d6d;
         filter: drop-shadow(0 0 12px rgba(255, 80, 120, 1));
     }
     50% {
-        stroke: #00d4ff; /* bright blue (updated weight) */
+        stroke: #00d4ff;
         filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.95));
     }
     100% {
-        stroke: #ff4d6d; /* back to red */
+        stroke: #ff4d6d;
         filter: drop-shadow(0 0 12px rgba(255, 80, 120, 1));
     }
 }
+
 .learning-note {
     margin-top: 10px;
     font-size: 14px;
@@ -421,6 +438,7 @@ section {
     opacity: 0.85;
     text-align: center;
 }
+
 /* Loss Bar */
 .loss-meter {
   width: 250px;
@@ -438,16 +456,9 @@ section {
   transition: width 1.5s ease, background 1.5s ease;
 }
 
-/* Output neuron gradual improvement glow */
 .training-output {
   animation: learnPulse 3.5s infinite ease-in-out;
 }
-
-/* @keyframes learnPulse {
-  0%   { filter: drop-shadow(0 0 3px #ff4b4b); }
-  50%  { filter: drop-shadow(0 0 15px #ffd85c); }
-  100% { filter: drop-shadow(0 0 5px #00ff9d); }
-} */
 
 .loss-value {
   text-align: center;
@@ -482,38 +493,80 @@ footer {
   background: #0b1224;
   font-size: 14px;
 }
-/* Responsive layout for mobile screens */
+
+/* ------------------ RESPONSIVENESS ------------------ */
+
+/* Tablet view (≤1024px) */
+@media (max-width: 1024px) {
+    .perceptron-container {
+        gap: 30px;
+        flex-direction: column;
+        text-align: center;
+    }
+    .perceptron-text, 
+    .perceptron-visual {
+        width: 90%;
+    }
+    .row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .row p, .row ul, .row .formula {
+        width: 100%;
+    }
+}
+
+/* Mobile view (≤768px) */
 @media (max-width: 768px) {
+    #title {
+        font-size: 2.2rem;
+    }
+
+    section {
+        padding: 25px 20px;
+    }
+
     .perceptron-container {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 24px;
     }
-    .perceptron-text,
+
+    .perceptron-text, 
     .perceptron-visual {
         width: 100%;
         text-align: center;
     }
+
     .diagram-box {
-        max-width: 90%;
-        height: auto;
-    }
-    svg {
         width: 100%;
-        height: auto;
+        padding: 15px;
     }
+
+    .example-container {
+        padding: 18px;
+        margin: 25px auto;
+        width: 90%;
+    }
+
     nav {
-        width: 100%;
-        padding: 0 15px;
+        flex-direction: column;
+        height: auto;
+        padding: 10px 20px;
+        gap: 8px;
     }
+
     .nav-right {
-        gap: 16px;
-    }
-}
-/* Extra small screens (phones) */
-@media (max-width: 600px) {
-    .perceptron-container {
-        gap: 35px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
     }
 }
 
+/* Extra small (≤480px) */
+@media (max-width: 480px) {
+    #title { font-size: 1.8rem; }
+    #subtitle { font-size: 0.95rem; }
+    .perceptron-text { font-size: 14px; line-height: 1.5; }
+    .diagram-box { padding: 12px; }
+}
